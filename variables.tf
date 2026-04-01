@@ -1,0 +1,13 @@
+variable "subscription_id" { type = string }
+variable "resource_group_name" { type = string }
+variable "aks_cluster_name" { type = string }
+variable "aks_dns_prefix" { type = string }
+variable "aks_node_count" { type = number }
+variable "aks_vm_size" { type = string }
+variable "application" { type = string }
+variable "environment" { type = string }
+variable "owner" { type = string }
+variable "cost_center" { type = string }
+variable "business_unit" { type = string }
+variable "data_classification" { type = string }
+variable "criticality" { type = string }
