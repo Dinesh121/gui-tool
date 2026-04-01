@@ -1,0 +1,13 @@
+subscription_id     = "57281d6d-7da8-435e-b25d-87a16b2e7a32"
+resource_group_name = "rg-workload"
+aks_cluster_name    = "aks-workload-dev"
+aks_dns_prefix      = "aksdev"
+aks_node_count      = 2
+aks_vm_size         = "Standard_DS2_v2"
+application          = "sample-app"
+environment          = "dev"
+owner                = "platform-team@contoso.com"
+cost_center          = "CC-0000"
+business_unit        = "engineering"
+data_classification  = "internal"
+criticality          = "medium"
