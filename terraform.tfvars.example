@@ -1,97 +1,18 @@
-subscription_id = "57281d6d-7da8-435e-b25d-87a16b2e7a32"
+subscription_id      = "57281d6d-7da8-435e-b25d-87a16b2e7a32"
+resource_group_name  = "rg-app-workload"
+location             = "eastus"
+vm_name              = "vm-workload-01"
+vm_size              = "Standard_B2s"
+admin_username       = "azureadmin"
+ssh_public_key       = "null"
+admin_password       = null # set TF_VAR_admin_password for Windows / password Linux
 
-# Stack r0: App Service
-# — stack r0 (governance tags)
-r0_application          = "sample-app"
-r0_environment          = "dev"
-r0_owner                = "platform-team@contoso.com"
-r0_cost_center          = "CC-0000"
-r0_business_unit        = "engineering"
-r0_data_classification  = "internal"
-r0_criticality          = "medium"
-r0_resource_group_name = "rg-workload"
-r0_app_name            = "app-workload-dev"
-r0_service_plan_sku    = "B1"
-r0_runtime_stack       = "NODE|20-lts"
-r0_https_only                      = true
-r0_enable_system_assigned_identity = true
-r0_vnet_route_all_enabled          = false
-
-# Stack r1: Azure Kubernetes Service (AKS)
-# — stack r1 (governance tags)
-r1_application          = "sample-app"
-r1_environment          = "dev"
-r1_owner                = "platform-team@contoso.com"
-r1_cost_center          = "CC-0000"
-r1_business_unit        = "engineering"
-r1_data_classification  = "internal"
-r1_criticality          = "medium"
-r1_resource_group_name = "rg-workload"
-r1_aks_cluster_name    = "aks-workload-dev"
-r1_aks_dns_prefix      = "aksdev"
-r1_aks_node_count      = 2
-r1_aks_vm_size         = "Standard_DS2_v2"
-
-# Stack r2: Azure SQL Managed Instance
-# — stack r2 (governance tags)
-r2_application          = "sample-app"
-r2_environment          = "dev"
-r2_owner                = "platform-team@contoso.com"
-r2_cost_center          = "CC-0000"
-r2_business_unit        = "engineering"
-r2_data_classification  = "internal"
-r2_criticality          = "medium"
-r2_resource_group_name = "rg-workload"
-r2_server_name         = "sql-workload-dev"
-r2_administrator_login = "sqladmin"
-# sql_admin_password supplied via TF_VAR_sql_admin_password (not committed)
-r2_minimum_tls_version = "1.2"
-r2_public_network_access_enabled = false
-
-# Stack r3: User-assigned managed identity
-# — stack r3 (governance tags)
-r3_application          = "sample-app"
-r3_environment          = "dev"
-r3_owner                = "platform-team@contoso.com"
-r3_cost_center          = "CC-0000"
-r3_business_unit        = "engineering"
-r3_data_classification  = "internal"
-r3_criticality          = "medium"
-r3_resource_group_name = "rg-workload"
-r3_identity_name       = "id-workload-dev"
-
-# Stack r4: Azure SQL Database
-# — stack r4 (governance tags)
-r4_application          = "sample-app"
-r4_environment          = "dev"
-r4_owner                = "platform-team@contoso.com"
-r4_cost_center          = "CC-0000"
-r4_business_unit        = "engineering"
-r4_data_classification  = "internal"
-r4_criticality          = "medium"
-r4_resource_group_name = "rg-workload"
-r4_server_name         = "sql-workload-dev"
-r4_administrator_login = "sqladmin"
-# sql_admin_password supplied via TF_VAR_sql_admin_password (not committed)
-r4_minimum_tls_version = "1.2"
-r4_public_network_access_enabled = false
-
-# Stack r5: Azure Data Lake Storage
-# — stack r5 (governance tags)
-r5_application          = "sample-app"
-r5_environment          = "dev"
-r5_owner                = "platform-team@contoso.com"
-r5_cost_center          = "CC-0000"
-r5_business_unit        = "engineering"
-r5_data_classification  = "internal"
-r5_criticality          = "medium"
-r5_resource_group_name   = "rg-workload"
-r5_storage_account_name  = "stworkloaddev001"
-r5_account_tier          = "Standard"
-r5_account_replication_type = "ZRS"
-r5_account_kind          = "StorageV2"
-r5_access_tier           = "Hot"
-r5_min_tls_version       = "TLS1_2"
-r5_https_traffic_only    = true
-r5_allow_nested_items_to_be_public = false
-r5_public_network_access_enabled   = true
+application          = "sample-app"
+environment          = "dev"
+owner                = "platform-team@contoso.com"
+cost_center          = "CC-0000"
+business_unit        = "engineering"
+data_classification  = "internal"
+criticality          = "medium"
+compliance_framework = "not_assessed"
+network_segmentation = "internal"
