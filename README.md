@@ -1,15 +1,28 @@
-# Multi-resource Terraform (Azure Provisioner)
+# Azure VM (modern AzureRM)
 
-This bundle deploys **6** workloads in one root module. Apply order may matter (e.g. resource group before other resources); review dependencies.
+## Overview
+This configuration deploys a **Linux** virtual machine using **azurerm_linux_virtual_machine** (not the deprecated azurerm_virtual_machine).
 
-## Stacks
+## Prerequisites
+- Terraform >= 1.6
+- Azure authentication via **Azure CLI** (`az login`) or OIDC/Service Principal in CI
+- Appropriate RBAC on the subscription (e.g. Contributor on resource group scope)
 
-- **r0** (App Service): `module.r0_workload` → `./stacks/r0/`
-- **r1** (Azure Kubernetes Service (AKS)): `module.r1_workload` → `./stacks/r1/`
-- **r2** (Azure SQL Managed Instance): `module.r2_workload` → `./stacks/r2/`
-- **r3** (User-assigned managed identity): `module.r3_workload` → `./stacks/r3/`
-- **r4** (Azure SQL Database): `module.r4_workload` → `./stacks/r4/`
-- **r5** (Azure Data Lake Storage): `module.r5_workload` → `./stacks/r5/`
+## Governance
+- Mandatory tags are enforced as variables — align names with **Azure Policy** initiatives.
+- Consider **Defender for Cloud** plans and **Log Analytics** diagnostic settings in a subsequent module.
+
+## Security notes
+- **Private access**: Public IP is **disabled** by default.
+- Prefer **Azure Bastion** for interactive access instead of opening SSH/RDP to the Internet.
+- **Managed identity** is enabled — prefer enabled for Key Vault integration.
+- Secrets: use `TF_VAR_admin_password` for password auth; never commit secrets.
+
+## Resilience
+- Environment: **dev**. For production, use **availability zones** or **availability set** as appropriate.
+
+## Cost
+- Review VM SKU and disk types; use **auto-shutdown** patterns for non-prod (see cost section in GUI).
 
 ## Commands
 
@@ -18,3 +31,11 @@ terraform init
 terraform plan -out=tfplan
 terraform apply tfplan
 ```
+
+## Next steps
+- Add **azurerm_monitor_diagnostic_setting** for platform metrics/logs.
+- Integrate **Azure Backup** (Recovery Services vault) if `enable_backup` is part of your standards.
+
+---
+
+See **docs/security_and_governance.md** for security, governance, compliance, and zero trust guidance.
